@@ -1,0 +1,27 @@
+name: FineEssentials
+version: '${project.version}'
+main: plugins.fine.FineEssentials
+api-version: 1.19
+prefix: FineEssentials
+authors: [ QingYu ]
+description: FineServer Essentials
+
+commands:
+  home:
+    description: 家园系统
+    usage: /<command>
+    permission: fine.home
+    permission-message: §c你没有权限使用此命令
+  tpa:
+    description: 传送请求
+    usage: /<command> <玩家>
+    permission: fine.tpa
+    permission-message: §c你没有权限使用此命令
+
+permissions:
+    fine.home:
+        description: 家园系统
+        default: true
+    fine.tpa:
+        description: 传送请求
+        default: true
