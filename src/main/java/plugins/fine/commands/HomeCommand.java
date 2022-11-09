@@ -4,8 +4,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
+import org.geysermc.api.Geyser;
+import org.geysermc.cumulus.form.SimpleForm;
+import org.geysermc.cumulus.util.FormImage;
+import org.geysermc.floodgate.api.FloodgateApi;
+import org.geysermc.floodgate.api.player.FloodgatePlayer;
+import org.geysermc.geyser.api.GeyserApi;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import plugins.fine.Form.HomeForm;
 import plugins.fine.sql.HomeTable;
 
 import java.util.Arrays;
@@ -22,6 +29,7 @@ public class HomeCommand implements TabExecutor {
             player.sendMessage("§6[Fine]§c 添加失败！你已经有一个名为§b"+ name +"§c的家了！");
         }
         return true;
+
     }
 
     public boolean DelHome(Player player, String name) {
@@ -63,7 +71,6 @@ public class HomeCommand implements TabExecutor {
         return true;
     }
 
-
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
@@ -92,17 +99,30 @@ public class HomeCommand implements TabExecutor {
                         }
                         break;
                     }
+                    case "gui":{
+                        if(FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())){
+                            HomeForm.sendHomeFormMain(FloodgateApi.getInstance().getPlayer(player.getUniqueId()));
+                        }else{
+                            player.sendMessage("§6[Fine]§c 你不是基岩版玩家！");
+                        }
+                    }
                 }
             }
         }
         return true;
     }
 
+
+    //代码待优化部分
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        Player player = (Player) sender;
         LinkedList<String> tips = new LinkedList<>();
         if (args.length == 1) {
             List<String> firstArgList = Arrays.asList("add", "del", "list","go");
+            if (FloodgateApi.getInstance().isFloodgatePlayer(player.getUniqueId())){
+                firstArgList = Arrays.asList("gui");
+            };
             if (args[0].isEmpty()) {
                 tips.addAll(firstArgList);
                 return tips;
@@ -157,3 +177,5 @@ public class HomeCommand implements TabExecutor {
         return null;
     }
 }
+
+
