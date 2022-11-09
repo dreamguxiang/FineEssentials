@@ -9,9 +9,11 @@ description: FineServer Essentials
 commands:
   home:
     description: 家园系统
-    usage: /<command>
+    usage: §g[Fine]§c/<command> [add/del/list] HomeName
     permission: fine.home
     permission-message: §c你没有权限使用此命令
+    default: true
+
   tpa:
     description: 传送请求
     usage: /<command> <玩家>

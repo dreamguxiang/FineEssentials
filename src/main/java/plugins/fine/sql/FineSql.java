@@ -26,6 +26,7 @@ public class FineSql {
             Bukkit.getPluginManager().disablePlugin(FineEssentials.getInstance());
             return;
         }
+        Instance = this;
     }
 
     public static void closeSql(){

@@ -36,7 +36,7 @@ public final class FineEssentials extends JavaPlugin {
     }
 
     private void initTable() {
-        ((HomeTable)fineSql).createTable();
+        HomeTable.createTable();
     }
 
     @Override
