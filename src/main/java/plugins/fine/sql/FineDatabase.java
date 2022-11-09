@@ -8,11 +8,11 @@ import plugins.fine.FineEssentials;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class FineSql {
-    private static FineSql Instance;
+public class FineDatabase {
+    private static FineDatabase Instance;
     public SQLManager sqlManager;
 
-    public FineSql(String driver, String url, String user, String password) {
+    public FineDatabase(String driver, String url, String user, String password) {
         sqlManager = EasySQL.createManager(driver, url, user, password);
 
         try {
@@ -30,11 +30,11 @@ public class FineSql {
     }
 
     public static void closeSql(){
-        if (Objects.nonNull(FineSql.getInstance().sqlManager)){
-            EasySQL.shutdownManager(FineSql.getInstance().sqlManager);
+        if (Objects.nonNull(FineDatabase.getInstance().sqlManager)){
+            EasySQL.shutdownManager(FineDatabase.getInstance().sqlManager);
         }
     }
-    public static FineSql getInstance() {
+    public static FineDatabase getInstance() {
         return Instance;
     }
 }

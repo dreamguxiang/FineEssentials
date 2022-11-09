@@ -16,7 +16,7 @@ import java.util.List;
 public class HomeTable {
 
     static public void createTable(){
-        FineSql.getInstance().sqlManager.createTable("HomeList")
+        FineDatabase.getInstance().sqlManager.createTable("HomeList")
                 .addAutoIncrementColumn("id",  true)
                 .addColumn("Uuid", "TEXT NOT NULL")
                 .addColumn("HomeName", "VARCHAR(50) NOT NULL")
@@ -31,7 +31,7 @@ public class HomeTable {
 
     static public boolean addHome(String uuid, String homename, double PosX, double PosY, double PosZ, String world, float yaw, float pitch) {
         if (isHomeExist(uuid, homename)) return false;
-        FineSql.getInstance().sqlManager.createInsert("HomeList")
+        FineDatabase.getInstance().sqlManager.createInsert("HomeList")
                 .setColumnNames("Uuid", "HomeName", "PosX", "PosY", "PosZ", "World", "Yaw", "Pitch")
                 .setParams(uuid, homename, PosX, PosY, PosZ, world, yaw, pitch)
                 .returnGeneratedKey().execute((exception, action) -> {
@@ -42,7 +42,7 @@ public class HomeTable {
 
     static public boolean addHome(String uuid, String homename, Location location) {
         if (isHomeExist(uuid, homename)) return false;
-        FineSql.getInstance().sqlManager.createInsert("HomeList")
+        FineDatabase.getInstance().sqlManager.createInsert("HomeList")
                 .setColumnNames("Uuid", "HomeName", "PosX", "PosY", "PosZ", "World", "Yaw", "Pitch")
                 .setParams(uuid, homename, location.getX(),  location.getY(),  location.getZ(),  location.getWorld().getName(), location.getYaw(), location.getPitch())
                 .returnGeneratedKey().execute((exception, action) -> {
@@ -53,7 +53,7 @@ public class HomeTable {
 
     static public boolean deleteHome(String uuid, String homename) {
         if (!isHomeExist(uuid, homename)) return false;
-        FineSql.getInstance().sqlManager.createDelete("HomeList")
+        FineDatabase.getInstance().sqlManager.createDelete("HomeList")
                 .addCondition("Uuid", uuid)
                 .addCondition("HomeName", homename)
                 .build()
@@ -65,7 +65,7 @@ public class HomeTable {
 
 
     static public Location getHome(String uuid, String homename) {
-        try (SQLQuery query =         FineSql.getInstance().sqlManager.createQuery().inTable("HomeList")
+        try (SQLQuery query = FineDatabase.getInstance().sqlManager.createQuery().inTable("HomeList")
                 .addCondition("Uuid", uuid)
                 .addCondition("HomeName", homename)
                 .build().execute()){
@@ -84,7 +84,7 @@ public class HomeTable {
     }
 
     static public boolean isHomeExist(String uuid, String homename) {
-        try (SQLQuery query =         FineSql.getInstance().sqlManager.createQuery().inTable("HomeList")
+        try (SQLQuery query = FineDatabase.getInstance().sqlManager.createQuery().inTable("HomeList")
                 .addCondition("Uuid", uuid)
                 .addCondition("HomeName", homename)
                 .build().execute()){
@@ -96,7 +96,7 @@ public class HomeTable {
     }
 
     static public int getHomeCount(String uuid) {
-        try (SQLQuery query =         FineSql.getInstance().sqlManager.createQuery().inTable("HomeList")
+        try (SQLQuery query = FineDatabase.getInstance().sqlManager.createQuery().inTable("HomeList")
                 .addCondition("Uuid", uuid)
                 .build().execute()) {
             int count = 0;
@@ -111,7 +111,7 @@ public class HomeTable {
     }
 
     static public List<String> getHomeList(String uuid) {
-        try (SQLQuery query = FineSql.getInstance().sqlManager.createQuery()
+        try (SQLQuery query = FineDatabase.getInstance().sqlManager.createQuery()
                 .inTable("HomeList")
                 .selectColumns("Uuid", "HomeName")
                 .addCondition("Uuid", uuid)

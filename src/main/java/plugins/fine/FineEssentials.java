@@ -5,13 +5,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import plugins.fine.commands.HomeCommand;
-import plugins.fine.sql.FineSql;
+import plugins.fine.sql.FineDatabase;
 import plugins.fine.sql.HomeTable;
 
 public final class FineEssentials extends JavaPlugin {
     private static FineEssentials Instance;
     FileConfiguration config;
-    FineSql fineSql;
+    FineDatabase fineSql;
     private void registerCommands() {
         getCommand("home").setExecutor(new HomeCommand());
     }
@@ -32,7 +32,7 @@ public final class FineEssentials extends JavaPlugin {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-        fineSql = new FineSql(driver, url, user, password);
+        fineSql = new FineDatabase(driver, url, user, password);
     }
 
     private void initTable() {
@@ -50,7 +50,7 @@ public final class FineEssentials extends JavaPlugin {
     @Override
     public void onDisable() {
         // Plugin shutdown logic
-        FineSql.closeSql();
+        FineDatabase.closeSql();
     }
 
     public static FineEssentials getInstance() {
