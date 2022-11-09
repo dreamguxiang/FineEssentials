@@ -15,12 +15,22 @@ import java.util.List;
 public class HomeCommand implements TabExecutor {
 
     public boolean AddHome(Player player, String name) {
-        HomeTable.addHome(player.getUniqueId().toString(), name, player.getLocation());
-        player.sendMessage("§6[Fine]§a 设置家成功！");
+        boolean ret =  HomeTable.addHome(player.getUniqueId().toString(), name, player.getLocation());
+        if (ret) {
+            player.sendMessage("§6[Fine]§a 成功添加家"+ name);
+        } else {
+            player.sendMessage("§6[Fine]§c 添加失败！你已经有一个名为§b"+ name +"§c的家了！");
+        }
         return true;
     }
 
     public boolean DelHome(Player player, String name) {
+        boolean rte =  HomeTable.deleteHome(player.getUniqueId().toString(), name);
+        if (rte) {
+            player.sendMessage("§6[Fine]§a 成功删除家"+ name);
+        } else {
+            player.sendMessage("§6[Fine]§c 删除失败！你没有一个名为§b"+ name +"§c的家！");
+        }
         return true;
     }
 
@@ -31,15 +41,25 @@ public class HomeCommand implements TabExecutor {
             if (i == list.size() - 1) {
                 homes.append(list.get(i));
             } else {
-                homes.append(list.get(i)).append(", ");
+                homes.append(list.get(i)).append("§a, ");
             }
         }
         Integer count = HomeTable.getHomeCount(player.getUniqueId().toString());
-        player.sendMessage("§6[Fine]§a 你一共有§b"+count +"§a个家，分别是：§b", homes.toString());
+        player.sendMessage("§6[Fine]§a 你一共有§b"+count +"§a个家，分别是：§b"+ homes.toString());
         return true;
     }
 
     public boolean GoHome(Player player, String name) {
+        if (HomeTable.getHomeCount(player.getUniqueId().toString()) == 0) {
+            player.sendMessage("§6[Fine]§c 你还没有家！");
+            return false;
+        }
+        if (!HomeTable.isHomeExist(player.getUniqueId().toString(), name)) {
+            player.sendMessage("§6[Fine]§c 你没有一个名为§b"+ name +"§c的家！");
+            return false;
+        }
+        player.teleport(HomeTable.getHome(player.getUniqueId().toString(), name));
+        player.sendMessage("§6[Fine]§a 成功传送到家"+ name);
         return true;
     }
 
@@ -57,11 +77,19 @@ public class HomeCommand implements TabExecutor {
                         break;
                     }
                     case "del": {
-                        player.sendMessage("Delete home");
+                        if (args.length == 2) {
+                            DelHome(player, args[1]);
+                        }
                         break;
                     }
                     case "list": {
                         HomeList(player);
+                        break;
+                    }
+                    case "go": {
+                        if (args.length == 2) {
+                            GoHome(player, args[1]);
+                        }
                         break;
                     }
                 }
@@ -74,7 +102,7 @@ public class HomeCommand implements TabExecutor {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         LinkedList<String> tips = new LinkedList<>();
         if (args.length == 1) {
-            List<String> firstArgList = Arrays.asList("add", "del", "list");
+            List<String> firstArgList = Arrays.asList("add", "del", "list","go");
             if (args[0].isEmpty()) {
                 tips.addAll(firstArgList);
                 return tips;
@@ -108,6 +136,23 @@ public class HomeCommand implements TabExecutor {
                     return tips;
                 }
             }
+            if (args[0].equalsIgnoreCase("go".toLowerCase())) {
+                List<String> secondArgList = HomeTable.getHomeList(((Player)sender).getUniqueId().toString());
+                if (args[1].isEmpty()) {
+                    tips.addAll(secondArgList);
+                    return tips;
+                } else {
+                    secondArgList.forEach(secondArg -> {
+                        if (secondArg.toLowerCase().startsWith(args[1].toLowerCase())) {
+                            tips.add(secondArg);
+                        }
+                    });
+                    return tips;
+                }
+            }
+        }
+        if (args.length == 3) {
+            return tips;
         }
         return null;
     }
