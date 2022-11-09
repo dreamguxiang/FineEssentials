@@ -49,7 +49,7 @@ public class HomeCommand implements TabExecutor {
             if (i == list.size() - 1) {
                 homes.append(list.get(i));
             } else {
-                homes.append(list.get(i)).append("§a, ");
+                homes.append(list.get(i)).append("§a, §b");
             }
         }
         Integer count = HomeTable.getHomeCount(player.getUniqueId().toString());

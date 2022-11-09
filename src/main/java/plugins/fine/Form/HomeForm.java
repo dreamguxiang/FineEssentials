@@ -56,13 +56,13 @@ public class HomeForm {
         cust.title("创建一个家");
         cust.input("请输入家的名字", "家的名字");
 
-        cust.validResultHandler(response -> {
+        player.sendForm( cust.validResultHandler(response -> {
             String name = response.asInput(0);
             Player pl = Bukkit.getServer().getPlayer(player.getJavaUniqueId());
             if(pl != null){
                 pl.performCommand("home add " + name);
             }
-        }).build();
+        }).build());
     }
 
     private static void sendHomeFormDelHome(FloodgatePlayer player){
