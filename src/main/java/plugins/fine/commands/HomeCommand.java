@@ -4,12 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.geysermc.api.Geyser;
-import org.geysermc.cumulus.form.SimpleForm;
-import org.geysermc.cumulus.util.FormImage;
 import org.geysermc.floodgate.api.FloodgateApi;
-import org.geysermc.floodgate.api.player.FloodgatePlayer;
-import org.geysermc.geyser.api.GeyserApi;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import plugins.fine.Form.HomeForm;
@@ -20,7 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HomeCommand implements TabExecutor {
-
     public boolean AddHome(Player player, String name) {
         boolean ret =  HomeTable.addHome(player.getUniqueId().toString(), name, player.getLocation());
         if (ret) {
