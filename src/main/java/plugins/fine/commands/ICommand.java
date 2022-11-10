@@ -10,10 +10,12 @@ import java.util.function.Function;
 
 public abstract class ICommand {
 
+
+    private String cmdName;
     /**
      * 子指令名
      */
-    private String cmdName;
+    private String subcmdName;
 
     /**
      * 子指令参数
@@ -34,8 +36,9 @@ public abstract class ICommand {
         this.cmdName = cmdName;
     }
 
-    public ICommand(String cmdName, String params,String usage) {
+    public ICommand(String cmdName,String subcmdName, String params,String usage) {
         this.cmdName = cmdName;
+        this.subcmdName = subcmdName;
         this.info = usage;
         this.params = params;
     }
@@ -46,7 +49,7 @@ public abstract class ICommand {
 
 
     public String showUsage() {
-        return ChatColor.AQUA + getCmdName() + " §r" + cmdName + " "+ params + " -- " + info;
+        return ChatColor.AQUA + getCmdName() + " §r" + subcmdName + " "+ params + " -- " + info;
     }
     /**
      * 指令内容

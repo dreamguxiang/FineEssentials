@@ -27,7 +27,7 @@ public class ListWarpCmd extends ICommand {
         return true;
     }
     public ListWarpCmd() {
-        super("warp", "", "列出所有传送点");
+        super("warp","list", "", "列出所有传送点");
     }
 
     @Override

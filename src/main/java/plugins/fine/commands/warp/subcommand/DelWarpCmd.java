@@ -23,7 +23,7 @@ public class DelWarpCmd extends ICommand {
     }
 
     public DelWarpCmd() {
-        super("warp","传送点的名字","删除一个传送点");
+        super("warp","del","传送点的名字","删除一个传送点");
         setTabComplete(1, (player) -> WarpTable.getWarpList());
     }
 

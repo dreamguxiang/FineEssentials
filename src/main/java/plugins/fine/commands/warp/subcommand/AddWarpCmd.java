@@ -23,7 +23,7 @@ public class AddWarpCmd extends ICommand {
     }
 
     public AddWarpCmd() {
-        super("warp","传送点的名字","添加一个传送点");
+        super("warp","add","传送点的名字","添加一个传送点");
     }
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {

@@ -7,10 +7,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.FloodgateApi;
 import plugins.fine.commands.ICommand;
-import plugins.fine.commands.warp.subcommand.AddWarpCmd;
-import plugins.fine.commands.warp.subcommand.DelWarpCmd;
-import plugins.fine.commands.warp.subcommand.GoWarpCmd;
-import plugins.fine.commands.warp.subcommand.ListWarpCmd;
+import plugins.fine.commands.warp.subcommand.*;
 
 
 import java.util.*;
@@ -37,6 +34,7 @@ public class WarpCommandHandler implements TabExecutor {
         commands.put("del", new DelWarpCmd());
         commands.put("list", new ListWarpCmd());
         commands.put("go", new GoWarpCmd());
+        commands.put("gui", new GuiWarpCmd());
     }
 
     public boolean isBedrockPlayer(CommandSender sender) {
@@ -79,6 +77,8 @@ public class WarpCommandHandler implements TabExecutor {
                 boolean res = cmd.onCommand(sender, params);
                 if (!res) {
                     sender.sendMessage(cmd.showUsage());
+                } else{
+                    return true;
                 }
             }
         } catch (Exception e) {
@@ -86,6 +86,7 @@ public class WarpCommandHandler implements TabExecutor {
             sender.sendMessage("§l§6[Fine]§c 发生了异常：" + e.getMessage());
             return true;
         }
+        sender.sendMessage("§l§6[Fine]§c 未知的命令或者参数错误");
         return true;
     }
 

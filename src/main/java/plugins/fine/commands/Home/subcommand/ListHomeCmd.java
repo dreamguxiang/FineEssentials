@@ -24,7 +24,7 @@ public class ListHomeCmd  extends ICommand {
     }
 
     public ListHomeCmd() {
-        super("home", "", "列出所有家");
+        super("home", "list","", "列出所有家");
     }
 
     @Override

@@ -22,7 +22,7 @@ public class GoHomeCmd  extends ICommand {
     }
 
     public GoHomeCmd() {
-        super("home", "家的名字", "传送到一个家");
+        super("home","go", "家的名字", "传送到一个家");
         setTabComplete(1, (player) -> HomeTable.getHomeList((player.getUniqueId().toString())));
     }
 

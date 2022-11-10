@@ -9,7 +9,7 @@ import plugins.fine.form.HomeForm;
 public class GuiHomeCmd  extends ICommand {
 
     public GuiHomeCmd() {
-        super("home", "", "打开家的GUI");
+        super("home", "gui","", "打开家的GUI");
     }
 
     @Override

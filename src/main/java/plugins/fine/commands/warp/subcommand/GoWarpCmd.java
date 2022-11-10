@@ -22,7 +22,7 @@ public class GoWarpCmd extends ICommand {
     }
 
     public GoWarpCmd() {
-        super("warp", "传送点的名字", "传送到一个传送点");
+        super("warp", "go","传送点的名字", "传送到一个传送点");
         setTabComplete(1, (player) -> WarpTable.getWarpList());
     }
 

@@ -76,6 +76,8 @@ public class HomeCommandHandler implements TabExecutor {
                 boolean res = cmd.onCommand(sender, params);
                 if (!res) {
                     sender.sendMessage(cmd.showUsage());
+                }else{
+                    return true;
                 }
             }
         } catch (Exception e) {
@@ -83,6 +85,7 @@ public class HomeCommandHandler implements TabExecutor {
             sender.sendMessage(ChatColor.RED + "发生了异常：" + e.getMessage());
             return true;
         }
+        sender.sendMessage("§l§6[Fine]§c 未知的命令或者参数错误");
         return true;
     }
 

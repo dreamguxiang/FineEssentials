@@ -20,7 +20,7 @@ public class DelHomeCmd  extends ICommand {
     }
 
     public DelHomeCmd() {
-        super("home","家的名字","删除一个家");
+        super("home","del","家的名字","删除一个家");
         setTabComplete(1, (player) -> HomeTable.getHomeList((player.getUniqueId().toString())));
     }
 

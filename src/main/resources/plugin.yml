@@ -11,7 +11,6 @@ commands:
     description: 家园系统
     permission: fine.home.player
     permission-message: §c你没有权限使用此命令
-    default: true
 
   tpa:
     description: 传送请求
@@ -22,7 +21,6 @@ commands:
     description: 传送点系统
     permission: fine.warp
     permission-message: §c你没有权限使用此命令
-    default: true
 
 permissions:
   fine.home.player:
@@ -33,6 +31,7 @@ permissions:
         fine.home.del: true
         fine.home.list: true
         fine.home.go: true
+        fine.home.gui: true
 
   fine.tpa.player:
     description: 传送请求全部玩家权限
@@ -45,10 +44,12 @@ permissions:
 
   fine.warp.player:
     description: 传送点系统全部玩家权限
-    default: op
+    default: true
     children:
       fine.warp.list: true
       fine.warp.go: true
+      fine.warp.gui: true
+
   fine.warp.op:
     description: 传送点系统管理员权限
     default: op
@@ -68,6 +69,9 @@ permissions:
   fine.home.go:
     description: 传送到家
     default: true
+  fine.home.gui:
+    description: 打开表单
+    default: true
 
   fine.warp.add:
     description: 添加传送点
@@ -80,4 +84,7 @@ permissions:
     default: true
   fine.warp.go:
     description: 传送到传送点
+    default: true
+  fine.warp.gui:
+    description: 打开表单
     default: true

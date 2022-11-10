@@ -21,7 +21,7 @@ public class AddHomeCmd extends ICommand {
     }
 
     public AddHomeCmd() {
-        super("home","家的名字","添加一个家");
+        super("home","add","家的名字","添加一个家");
     }
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
