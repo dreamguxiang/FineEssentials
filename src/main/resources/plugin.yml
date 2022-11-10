@@ -14,12 +14,12 @@ commands:
 
   tpa:
     description: 传送请求
-    permission: fine.tpa
+    permission: fine.tpa.player
     permission-message: §c你没有权限使用此命令
 
   warp:
     description: 传送点系统
-    permission: fine.warp
+    permission: fine.warp.player
     permission-message: §c你没有权限使用此命令
 
 permissions:

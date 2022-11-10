@@ -1,9 +1,8 @@
-package plugins.fine.form;
+package plugins.fine.sql.form;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.geysermc.cumulus.component.ButtonComponent;
 import org.geysermc.cumulus.form.CustomForm;
 import org.geysermc.cumulus.form.SimpleForm;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;

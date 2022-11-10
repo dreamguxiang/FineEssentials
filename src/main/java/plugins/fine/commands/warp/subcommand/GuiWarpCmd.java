@@ -4,9 +4,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.geysermc.floodgate.api.FloodgateApi;
 import plugins.fine.commands.ICommand;
-import plugins.fine.form.HomeForm;
-import plugins.fine.form.WarpForm;
-import plugins.fine.sql.WarpTable;
+import plugins.fine.sql.form.WarpForm;
 
 public class GuiWarpCmd  extends ICommand {
 

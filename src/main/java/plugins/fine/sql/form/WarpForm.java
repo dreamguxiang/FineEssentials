@@ -1,4 +1,4 @@
-package plugins.fine.form;
+package plugins.fine.sql.form;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.geysermc.cumulus.form.CustomForm;
 import org.geysermc.cumulus.form.SimpleForm;
 import org.geysermc.floodgate.api.player.FloodgatePlayer;
-import plugins.fine.sql.HomeTable;
 import plugins.fine.sql.WarpTable;
 
 import java.util.List;
@@ -92,7 +91,6 @@ public class WarpForm {
                 warplist.forEach(s -> {
                     if (response.clickedButtonId() == warplist.indexOf(s)) {
                         pl.performCommand("warp del " + s);
-
                     }
                 });
             }).build());
