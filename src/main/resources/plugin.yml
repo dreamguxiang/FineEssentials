@@ -9,21 +9,75 @@ description: FineServer Essentials
 commands:
   home:
     description: 家园系统
-    usage: §g[Fine]§c/<command> [add/del/list] HomeName
-    permission: fine.home
+    permission: fine.home.player
     permission-message: §c你没有权限使用此命令
     default: true
 
   tpa:
     description: 传送请求
-    usage: /<command> <玩家>
     permission: fine.tpa
     permission-message: §c你没有权限使用此命令
 
+  warp:
+    description: 传送点系统
+    permission: fine.warp
+    permission-message: §c你没有权限使用此命令
+    default: true
+
 permissions:
-    fine.home:
-        description: 家园系统
-        default: true
-    fine.tpa:
-        description: 传送请求
-        default: true
+  fine.home.player:
+    description: 家园系统全部玩家权限
+    default: true
+    children:
+        fine.home.add: true
+        fine.home.del: true
+        fine.home.list: true
+        fine.home.go: true
+
+  fine.tpa.player:
+    description: 传送请求全部玩家权限
+    default: op
+    children:
+        fine.tpa.send: true
+        fine.tpa.accept: true
+        fine.tpa.deny: true
+        fine.tpa.go: true
+
+  fine.warp.player:
+    description: 传送点系统全部玩家权限
+    default: op
+    children:
+      fine.warp.list: true
+      fine.warp.go: true
+  fine.warp.op:
+    description: 传送点系统管理员权限
+    default: op
+    children:
+      fine.warp.add: true
+      fine.warp.del: true
+
+  fine.home.add:
+    description: 添加家
+    default: true
+  fine.home.del:
+    description: 删除家
+    default: true
+  fine.home.list:
+    description: 查看家列表
+    default: true
+  fine.home.go:
+    description: 传送到家
+    default: true
+
+  fine.warp.add:
+    description: 添加传送点
+    default: op
+  fine.warp.del:
+    description: 删除传送点
+    default: op
+  fine.warp.list:
+    description: 查看传送点列表
+    default: true
+  fine.warp.go:
+    description: 传送到传送点
+    default: true

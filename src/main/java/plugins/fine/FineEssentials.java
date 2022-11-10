@@ -4,16 +4,19 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import plugins.fine.commands.HomeCommand;
+import plugins.fine.commands.home.HomeCommandHandler;
+import plugins.fine.commands.warp.WarpCommandHandler;
 import plugins.fine.sql.FineDatabase;
 import plugins.fine.sql.HomeTable;
+import plugins.fine.sql.WarpTable;
 
 public final class FineEssentials extends JavaPlugin {
     private static FineEssentials Instance;
     FileConfiguration config;
     FineDatabase fineSql;
     private void registerCommands() {
-        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("home").setExecutor(new HomeCommandHandler());
+        getCommand("warp").setExecutor(new WarpCommandHandler());
     }
 
     private void initConfig() {
@@ -36,6 +39,7 @@ public final class FineEssentials extends JavaPlugin {
     }
 
     private void initTable() {
+        WarpTable.createTable();
         HomeTable.createTable();
     }
 

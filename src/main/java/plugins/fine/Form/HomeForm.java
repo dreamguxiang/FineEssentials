@@ -1,4 +1,4 @@
-package plugins.fine.Form;
+package plugins.fine.form;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,12 +15,12 @@ public class HomeForm {
 
     public static void sendHomeFormMain(FloodgatePlayer player){
         player.sendForm(SimpleForm.builder()
-                .title("家园系统")
-                .content("请选择你要操作的类型")
-                .button("传送到一个家")
-                .button("创建一个家")
-                .button("删除一个家")
-                .button("查看我的家")
+                .title("§d家园系统")
+                .content("§b请选择你要操作的类型")
+                .button("§l§6传送到一个家")
+                .button("§l§a创建一个家")
+                .button("§l§c删除一个家")
+                .button("§l§e查看我的家")
                 .validResultHandler(response -> {
                     if (response.clickedButtonId() == 0) {
                         sendHomeFormGoHome(player);
@@ -36,7 +36,7 @@ public class HomeForm {
 
     private static void sendHomeFormGoHome(FloodgatePlayer player){
         SimpleForm.Builder sim =  SimpleForm.builder();
-        sim.title("传送到一个家");
+        sim.title("§d传送到一个家");
         List<String> homelist =  HomeTable.getHomeList(player.getJavaUniqueId().toString());
         homelist.forEach(sim::button);
         player.sendForm(sim.validResultHandler(response -> {
@@ -53,8 +53,8 @@ public class HomeForm {
 
     private static void sendHomeFormAddHome(FloodgatePlayer player){
         CustomForm.Builder cust = CustomForm.builder();
-        cust.title("创建一个家");
-        cust.input("请输入家的名字", "家的名字");
+        cust.title("§d创建一个家");
+        cust.input("§l§6请输入家的名字", "家的名字");
 
         player.sendForm( cust.validResultHandler(response -> {
             String name = response.asInput(0);
@@ -67,7 +67,7 @@ public class HomeForm {
 
     private static void sendHomeFormDelHome(FloodgatePlayer player){
         SimpleForm.Builder sim =  SimpleForm.builder();
-        sim.title("删除一个家");
+        sim.title("§d删除一个家");
         List<String> homelist =  HomeTable.getHomeList(player.getJavaUniqueId().toString());
         homelist.forEach(sim::button);
         player.sendForm(sim.validResultHandler(response -> {
@@ -83,11 +83,11 @@ public class HomeForm {
     }
     private  static void sendHomeFormListHome(FloodgatePlayer player){
         CustomForm.Builder sim =  CustomForm.builder();
-        sim.title("查看我的家");
+        sim.title("§d查看我的家");
         List<String> homelist =  HomeTable.getHomeList(player.getJavaUniqueId().toString());
         homelist.forEach(s -> {
             Location pos = HomeTable.getHome(player.getJavaUniqueId().toString(), s);
-            sim.label("名字: " + s + " | 位置: " + pos.getBlockX() + " " + pos.getBlockY() + " " + pos.getBlockZ()+ " | 世界：" + pos.getWorld().getName());
+            sim.label("§a名字: §b" + s + " §a| 位置: §5" + pos.getBlockX() + " " + pos.getBlockY() + " " + pos.getBlockZ()+ " §a| 世界：§6" + pos.getWorld().getName());
         });
         player.sendForm(sim.build());
     }
